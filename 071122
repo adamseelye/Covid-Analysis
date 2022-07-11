@@ -1,0 +1,42 @@
+I AM SCRUM MASTER
+
+Assign tasks to members.
+visualization, different coding
+data cleaning
+visualization website
+
+Come up with MVP by thurs. Give github.
+-stretch goals
+
+member githubs:
+SevinHawkins
+WalterNPena
+https://github.com/RomanADavis 
+
+
+https://covidtracking.com/data/api
+https://covidactnow.org/data-api
+https://rapidapi.com/collection/coronavirus-covid-19
+https://stackshare.io/stackups/tableau-vs-zeppelin
+
+
+Stretch:
+3D Visualization
+-look up different types, make more than 10 graphs
+data pipelines
+s3 bucketing
+
+
+MVP:
+take data, put into object
+manipulate object into graph
+	line graph
+	pie graph time series
+display graph
+Tableau
+10 queries
+
+
+Look for trends
+-among regions, countries, time
+
