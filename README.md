@@ -17,7 +17,6 @@ populations and to find any trends among the data.
 - Use Spark to process and model COVID data
 - Create a deliverable .jar file
 - 12 data queries: each displayed as a graph
-- present any trends
 - Implement Spark logging
 - Use Zeppelin for data visualization/analytics (graphs)
 
