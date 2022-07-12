@@ -41,6 +41,8 @@ Queries:
 	- Recovered
 
 **Data Trends:**
+
+
 	We expect to see a slow beginning to the pandemic followed
 	by explosive growth as the pandemic started to ramp up.
 	Eventually, new COVID case counts reach a plateau and then
