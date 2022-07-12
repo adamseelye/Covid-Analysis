@@ -13,41 +13,41 @@ To be VICTORIOUS, we set these goals:
 
 To reach Minimum Viable Product:
 
--A package will be published on GitHub.com/adamseelye/Project_2
--Use HDFS/Spark to process and model COVID data
--Create a deliverable .jar file
--10 data queries: each displayed as a graph
--present any trends
--Spark logging
--Use Tableau for data visualization/analytics (graphs)
+--A package will be published on GitHub.com/adamseelye/Project_2
+--Use HDFS/Spark to process and model COVID data
+--Create a deliverable .jar file
+--10 data queries: each displayed as a graph
+--present any trends
+--Spark logging
+--Use Tableau for data visualization/analytics (graphs)
 
 Queries:
 
  Pie Graph time series
-	-Confirmed Cases
-	-Deaths
-	-Recovered
+	--Confirmed Cases
+	--Deaths
+	--Recovered
  Line Graph Country
-	-Confirmed Cases
-	-Deaths
-	-Recovered
+	--Confirmed Cases
+	--Deaths
+	--Recovered
  Line Graph State
-	-Confirmed Cases
-	-Deaths
-	-Recovered
+	--Confirmed Cases
+	--Deaths
+	--Recovered
  Histogram World
- 	-Confirmed Cases
-	-Deaths
-	-Recovered
+ 	--Confirmed Cases
+	--Deaths
+	--Recovered
 
 Data Source:
 	https://health.google.com/covid-19/open-data/raw-data
 
 Stretch Goals:
 
--3D graphs
--complex data modeling
--s3 bucketing
--clean ui
--pdf export
--docker container
+--3D graphs
+--complex data modeling
+--s3 bucketing
+--clean ui
+--pdf export
+--docker container
