@@ -24,11 +24,19 @@ take data, put into object
 manipulate object into graph
 	line graph
 	pie graph time series
+	Line graph for overall 
+	Line graph for country 
+	Line graph for state 
+	Line graph for overall - deaths - recovered - confirmed 
+	Line graph for country Line graph for state 
+	Pie Graph by Country (for all dates) 
+
 display graph
 Tableau
 10 queries
 
+Data:
+Dates, Deaths, Location (be as granular as possible)
 
 Look for trends
 -among regions, countries, time
-
