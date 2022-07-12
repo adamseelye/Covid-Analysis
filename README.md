@@ -27,3 +27,9 @@ Stretch Goals:
 -3D graphs
 -complex data modeling
 -s3 bucketing
+
+
+Add:
+10 queries
+Which trends are we looking for?
+Include which data being used
