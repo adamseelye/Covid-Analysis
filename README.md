@@ -24,24 +24,24 @@ Use Tableau for data visualization/analytics (graphs)
 Queries:
 
  Pie Graph time series
-	1. Confirmed Cases
-	2. Deaths
-	3. Recovered
+	- Confirmed Cases
+	- Deaths
+	- Recovered
  Line Graph Country
-	4. Confirmed Cases
-	5. Deaths
-	6. Recovered
+	- Confirmed Cases
+	- Deaths
+	- Recovered
  Line Graph State
-	7. Confirmed Cases
-	8. Deaths
-	9. Recovered
+	- Confirmed Cases
+	- Deaths
+	- Recovered
  Histogram World
-	10. Confirmed Cases
-	11. Deaths
-	12. Recovered
+	- Confirmed Cases
+	- Deaths
+	- Recovered
 
 Data Source:
-	* https://health.google.com/covid-19/open-data/raw-data
+>	https://health.google.com/covid-19/open-data/raw-data
 
 Stretch Goals:
 
