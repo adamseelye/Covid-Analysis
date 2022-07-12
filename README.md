@@ -23,19 +23,19 @@ Use Tableau for data visualization/analytics (graphs)
 
 Queries:
 
-* Pie Graph time series
+ Pie Graph time series
 	1. Confirmed Cases
 	2. Deaths
 	3. Recovered
-* Line Graph Country
+ Line Graph Country
 	4. Confirmed Cases
 	5. Deaths
 	6. Recovered
-* Line Graph State
+ Line Graph State
 	7. Confirmed Cases
 	8. Deaths
 	9. Recovered
-* Histogram World
+ Histogram World
 	10. Confirmed Cases
 	11. Deaths
 	12. Recovered
