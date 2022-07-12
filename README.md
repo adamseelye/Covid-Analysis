@@ -24,30 +24,30 @@ Use Tableau for data visualization/analytics (graphs)
 Queries:
 
 * Pie Graph time series
->	- Confirmed Cases
->	- Deaths
->	- Recovered
+	1. Confirmed Cases
+	2. Deaths
+	3. Recovered
 * Line Graph Country
->	- Confirmed Cases
->	- Deaths
->	- Recovered
+	4. Confirmed Cases
+	5. Deaths
+	6. Recovered
 * Line Graph State
->	- Confirmed Cases
->	- Deaths
->	- Recovered
+	7. Confirmed Cases
+	8. Deaths
+	9. Recovered
 * Histogram World
-> 	- Confirmed Cases
->	- Deaths
->	- Recovered
+	10. Confirmed Cases
+	11. Deaths
+	12. Recovered
 
 Data Source:
->	https://health.google.com/covid-19/open-data/raw-data
+	* https://health.google.com/covid-19/open-data/raw-data
 
 Stretch Goals:
 
->	- 3D graphs
->	- complex data modeling
->	- s3 bucketing
->	- clean ui
->	- pdf export
->	- docker container
+	- 3D graphs
+	- complex data modeling
+	- s3 bucketing
+	- clean ui
+	- pdf export
+	- docker container
