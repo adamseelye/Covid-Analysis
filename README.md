@@ -1,15 +1,15 @@
 # Project 2
 
-##Group: VICTORIOUS
+## Group: VICTORIOUS
 
-**Project 2 is an analysis of COVID data using Spark.
+** Project 2 is an analysis of COVID data using Spark.
 
 We will be making queries of the data to better
 understand the effects of COVID-19 on certain 
-populations and to find any trends among the data.**
+populations and to find any trends among the data.
 
 
-##To be VICTORIOUS, we set these goals:
+## To be VICTORIOUS, we set these goals:
 
 To reach Minimum Viable Product:
 
