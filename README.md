@@ -21,15 +21,33 @@ To reach Minimum Viable Product:
 -Spark logging
 -Use Tableau for data visualization/analytics (graphs)
 
+Queries:
+
+ Pie Graph time series
+	-Confirmed Cases
+	-Deaths
+	-Recovered
+ Line Graph Country
+	-Confirmed Cases
+	-Deaths
+	-Recovered
+ Line Graph State
+	-Confirmed Cases
+	-Deaths
+	-Recovered
+ Histogram World
+ 	-Confirmed Cases
+	-Deaths
+	-Recovered
+
+Data Source:
+	https://health.google.com/covid-19/open-data/raw-data
 
 Stretch Goals:
 
 -3D graphs
 -complex data modeling
 -s3 bucketing
-
-
-Add:
-10 queries
-Which trends are we looking for?
-Include which data being used
+-clean ui
+-pdf export
+-docker container
