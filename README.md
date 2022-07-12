@@ -2,7 +2,7 @@
 
 ## Group: VICTORIOUS
 
-** Project 2 is an analysis of COVID data using Spark.
+Project 2 is an analysis of COVID data using Spark.
 
 We will be making queries of the data to better
 understand the effects of COVID-19 on certain 
@@ -41,7 +41,7 @@ Queries:
 	- Recovered
 
 Data Source:
->	https://health.google.com/covid-19/open-data/raw-data
+	**https://health.google.com/covid-19/open-data/raw-data**
 
 Stretch Goals:
 
