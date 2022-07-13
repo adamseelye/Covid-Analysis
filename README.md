@@ -14,7 +14,8 @@ populations and to find any trends among the data.
 **To reach Minimum Viable Product:**
 
 - A package will be published on GitHub.com/adamseelye/Project_2
-- Use Spark to process and model COVID data
+- Data will be loaded into Hive
+- Data then cleaned, transformed with Spark, loaded into Hive warehouse
 - Create a deliverable .jar file
 - 12 data queries: each displayed as a graph
 - Implement Spark logging
