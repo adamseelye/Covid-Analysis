@@ -1,0 +1,17 @@
+@(series: models.DaySeries, country: String)(implicit request: RequestHeader)
+
+<html>
+    <head>
+        <title>
+            Recovered - @country
+        </title>
+    </head>
+
+    <body>
+        @for(point <- series.datapoints){
+            <p>
+                @point.recovered
+            </p>
+        }
+    </body>
+</html>
