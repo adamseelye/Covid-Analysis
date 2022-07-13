@@ -10,20 +10,20 @@ import org.apache.spark.sql.functions.{desc, asc}
 
 import DB.session
 
-case class Day(id: String = "", observationDate: String = "", 
+case class Day(id:Long = -1L, date: String = "", 
   state: String = "", country: String = "", updated: String = "", 
-  confirmed: String = "", deaths: String = "", recovered: String = "") {
+  confirmed: Long = -1L, deaths: Long = -1L, recovered: Long = -1L) {
   
   def this(row: org.apache.spark.sql.Row) = {
     this(
-      row.getAs[String]("SNo"),
+      row.getAs[Long]("SNo"),
       row.getAs[String]("Observation Date"),
       row.getAs[String]("Province/State"),
       row.getAs[String]("Country/Region"),
       row.getAs[String]("Last Update"),
-      row.getAs[String]("Confirmed"),
-      row.getAs[String]("Deaths"),
-      row.getAs[String]("Recovered")
+      row.getAs[Long]("Confirmed"),
+      row.getAs[Long]("Deaths"),
+      row.getAs[Long]("Recovered")
     )
   }
 }
@@ -34,19 +34,20 @@ object Day {
 
     val schema = StructType(
         Array(
-            StructField("SNo", StringType, nullable=false),
+            StructField("SNo", LongType, nullable=false),
             StructField("Observation Date", StringType, nullable=false),
             StructField("Province/State", StringType, nullable=true),
             StructField("Country/Region", StringType, nullable=false),
             StructField("Last Update", StringType, nullable=false),
-            StructField("Confirmed", StringType, nullable=false),
-            StructField("Deaths", StringType, nullable=false),
-            StructField("Recovered", StringType, nullable=false)
+            StructField("Confirmed", LongType, nullable=false),
+            StructField("Deaths", LongType, nullable=false),
+            StructField("Recovered", LongType, nullable=false)
         )
     )
 
+    // TODO:  Pass in the schema when getting from csv
     var dataframe = session
-        .read.format("csv")
+        .read.schema(schema).format("csv")
         .option("header", "true")
         .load(csv_path)
 

@@ -1,0 +1,24 @@
+@(series: models.DaySeries, country: String, stat: String)(implicit request: RequestHeader)
+
+<html>
+    <head>
+        <title>
+            @stat - @country
+        </title>
+    </head>
+
+    <body>
+        @for(point <- series.datapoints){
+            <p>
+                <strong>@point.date:</strong>
+                @if(stat == "deaths"){
+                    @point.deaths
+                }else if(stat == "confirmed"){
+                    @point.confirmed
+                }else if(stat == "recovered"){
+                    @point.recovered
+                }
+            </p>
+        }
+    </body>
+</html>

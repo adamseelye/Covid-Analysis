@@ -1,9 +1,9 @@
 GET        /                       controllers.HomeController.index
 
 # Spark call test
-# GET        /test/country/:country/:stat     controllers.Test.country(country: String, stat: string)
+GET          /test/country/:country/:stat     controllers.Test.country(country: String, stat: String)
 # GET        /test/state/:state/:stat         controllers.Test.state(state: String, stat: String)   
-GET /test/deaths/country/:country controllers.Test.countryDeaths(country: String)
+# GET          /test/deaths/country/:country    controllers.Test.countryDeaths(country: String)
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file        controllers.Assets.at(path="/public", file)
 
