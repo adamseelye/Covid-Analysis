@@ -1,0 +1,3 @@
+07-17: Need to automate spark zeppelin queries.
+	Would prefer not to be typing them in 
+	during presentation.
