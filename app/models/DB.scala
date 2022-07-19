@@ -20,7 +20,7 @@ object DB {
         .enableHiveSupport()
         .getOrCreate() 
 
-    val url = "jdbc:mysql://localhost:3306/covide"
+    val url = "jdbc:mysql://localhost:3306/covid"
     val user = "roman"
     val password = ""
 }
