@@ -21,6 +21,5 @@ dependencyOverrides ++= Seq(
 lazy val root = (project in file("."))
   .enablePlugins(Common, PlayScala)
   .settings(
-    name := """Play-with-Spark""",
+  	name := """Play-with-Spark""" ,
   )
-
