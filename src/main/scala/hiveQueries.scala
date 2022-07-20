@@ -1,4 +1,4 @@
 object hiveQueries {
-  // this class may not be needed. use with hive
+  // this object may not be needed. use with hive
 
 }
