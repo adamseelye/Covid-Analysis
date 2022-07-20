@@ -21,6 +21,6 @@ dependencyOverrides ++= Seq(
 // use command "run -Dhttp.port=7777" in sbt shell in intellij to start server (at least for testing)
 lazy val root = (project in file("."))
   .enablePlugins(Common, PlayScala)
-  .settings {
-    name := "Play-with-Spark"
-  }
+  .settings (
+    name := """Play-with-Spark"""
+  )
