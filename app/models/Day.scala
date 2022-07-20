@@ -8,19 +8,23 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.functions.{desc, asc}
 // import com.github.nscala_time.time.Imports._
 
+import com.github.nscala_time.time.Imports._
+
 import DB.session
 
-case class Day(id:Long = -1L, date: String = "", 
-  state: String = "", country: String = "", updated: String = "", 
+case class Day(id:Long = -1L, 
+  date: java.sql.Date = new java.sql.Date(1970, 1, 1), state: String = "", 
+  country: String = "", 
+  updated: java.sql.Timestamp = new java.sql.Timestamp(0L), 
   confirmed: Long = -1L, deaths: Long = -1L, recovered: Long = -1L) {
   
   def this(row: org.apache.spark.sql.Row) = {
     this(
       row.getAs[Long]("SNo"),
-      row.getAs[String]("Observation Date"),
+      row.getAs[java.sql.Date]("Observation Date"),
       row.getAs[String]("Province/State"),
       row.getAs[String]("Country/Region"),
-      row.getAs[String]("Last Update"),
+      row.getAs[java.sql.Timestamp]("Last Update"),
       row.getAs[Long]("Confirmed"),
       row.getAs[Long]("Deaths"),
       row.getAs[Long]("Recovered")
@@ -50,6 +54,18 @@ object Day {
         .read.schema(schema).format("csv")
         .option("header", "true")
         .load(csv_path)
+    
+    // Not sure how else to parse the date and timestamp
+    dataframe = dataframe.select(
+        dataframe("SNo"),
+        to_date(dataframe("Observation Date"), "MM/dd/yyyy").as("Observation Date"),
+        dataframe("Province/State"),
+        dataframe("Country/Region"),
+        to_timestamp(dataframe("Last Update"), "MM/dd/yyyy HH:mm").as("Last Update"),
+        dataframe("Confirmed"),
+        dataframe("Deaths"),
+        dataframe("Recovered")
+    )
 
 
     dataframe.cache() // in case we do CRUD
@@ -68,11 +84,15 @@ object Day {
         dataframe.show()
     }
 
-    def country(country: String = "*"){
+    def country(country: String = "*"): models.DaySeries = {
         return dayseries.country(country)
     }
 
-    def state(state: String = "*"){
+    def state(state: String = "*"): models.DaySeries = {
         return dayseries.state(state)
+    }
+
+    def country_sums(): Array[models.CountrySum] = {
+        return dayseries.country_sums()
     }
 }

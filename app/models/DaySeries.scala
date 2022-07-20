@@ -11,27 +11,6 @@ import org.apache.spark.sql.functions.{desc, asc}
 import DB.session
 import DB.session.implicits._
 
-case class CountrySum(country: String, recovered: Long, deaths: Long, confirmed: Long){
-    def this(row: org.apache.spark.sql.Row) = {
-        this(
-            row.getAs[String]("Country/Region"),
-            row.getAs[Long]("Recovered"),
-            row.getAs[Long]("Deaths"),
-            row.getAs[Long]("Confirmed")
-        )
-    }
-}
-
-case class StateSum(country: String, recovered: Long, deaths: Long, confirmed: Long){
-    def this(row: org.apache.spark.sql.Row) = {
-        this(
-            row.getAs[String]("Country/Region"),
-            row.getAs[Long]("Recovered"),
-            row.getAs[Long]("Deaths"),
-            row.getAs[Long]("Confirmed")
-        )
-    }
-}
 case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){        
     val datapoints = dataframe.rdd.map( row =>
         new Day(row)
@@ -102,7 +81,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         return order_by("Recovered", order)
     }
 
-    def country_sum(){
+    def country_sums(): Array[models.CountrySum] = {
         val sums = dataframe.groupBy("Country/Region")
             .agg(
                 sum("Recovered").as("Recovered"), 
@@ -114,7 +93,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     }
 
     // sum by group?
-    def state_sums(){
+    def state_sums(): Array[models.StateSum] = {
         val sums = dataframe.groupBy("Country/Region", "Province/State")
             .agg(
                 sum("Recovered").as("Recovered"), 
