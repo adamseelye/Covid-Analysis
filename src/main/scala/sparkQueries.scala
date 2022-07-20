@@ -2,7 +2,7 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.{SaveMode, SparkSession}
 
 object sparkQueries {
-  // use this object to make spark connections and queries
+  // use this class to make spark connections and queries
   def cxn(): Unit = {
     // this function is a just a generic connection
     val spark = SparkSession
