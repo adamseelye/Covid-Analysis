@@ -1,0 +1,54 @@
+@import helper._
+@(countries: Array[models.CountrySum])(implicit request: RequestHeader)
+
+@common.layout("Countries"){
+  @common.message(request.flash, "Showing Countries")
+  <div class="container">
+    <div class="row">
+      <div class="col-4 bold">
+        <h5 class="text-center">
+          Country
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          States
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          Confirmed
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          Deaths
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          Recovered
+        </h5>
+      </div>
+    </div>
+    @for(country <- countries){
+      <div class="row">
+        <div class="col-4">
+          @country.country
+        </div>
+        <div class="col-2">
+          @country.states
+        </div>
+        <div class="col-2">
+          @country.confirmed
+        </div>
+        <div class="col-2">
+          @country.deaths   
+        </div>
+        <div class="col-2">
+          @country.recovered
+        </div>
+      </div>
+    }
+  </div>
+}

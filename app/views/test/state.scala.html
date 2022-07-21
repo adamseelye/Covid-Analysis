@@ -1,0 +1,44 @@
+@import helper._
+@(series: models.DaySeries, state: String, stat: String)(implicit request: RequestHeader)
+
+@common.layout(stat + " - " + country){
+    @common.message(request.flash, "Showing State - " + country)
+    <div class="container">
+        <div class="row">
+            <div class="col-3 bold">
+                Country
+            </div>
+            <div class="col-3 bold">
+                State
+            </div>
+            <div class="col-3 bold">
+                Date
+            </div>
+            <div class="col-3 bold">
+                @stat
+            </div>
+        </div>
+        @for(point <- series.datapoints){
+            <div class="row">
+                <div class="col-3">
+                    @point.country
+                </div>
+                <div class="col-3">
+                    @point.state
+                </div>
+                <div class="col-3">
+                    @point.date
+                </div>>
+                <div class="col-3">
+                    @if(stat == "deaths"){
+                        @point.deaths
+                    }else if(stat == "confirmed"){
+                        @point.confirmed
+                    }else if(stat == "recovered"){
+                        @point.recovered
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
