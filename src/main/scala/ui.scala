@@ -1,10 +1,27 @@
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.SparkSession
+
 object ui {
   // Command Line interfsce
   // Use in case web interface is not feasible
 
+  // AS - moved spark connection here. deleted sparkQueries object.
+  def cxn(): Unit = {
+    val spark = SparkSession
+      .builder
+      .appName("Spark Queries")
+      .master("spark://<hostaddr>:7077") // will prepare a server to use here
+      .config("spark.master", "local[*]")
+      .config("spark.driver.allowMultipleContexts", "true")
+      .enableHiveSupport()
+      .getOrCreate()
+    Logger.getLogger("org").setLevel(Level.ERROR)
+    println("created spark session")
+  }
+
   // main function that will start the application
   def main (args: Array[String]): Unit = {
-    sparkQueries.cxn()
+    cxn()
     mainMenu()
   }
 
