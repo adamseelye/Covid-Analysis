@@ -1,0 +1,30 @@
+@(title: String)(body: Html)(implicit request: RequestHeader)
+
+<!doctype html>
+<html lang="en">
+<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
+<head>
+    <meta charset="utf-8">    
+    <title>Covid Analysis - @title</title>
+</head>
+
+<body>
+    @common.navbar()(request)
+    <div class="container">
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <h1>@title</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                @body
+            </div>
+        </div>
+    </div>
+
+    <script src="@routes.Assets.versioned("js/bootstrap.bundle.min.js")" type="text/javascript"></script>
+</body>
+</html>

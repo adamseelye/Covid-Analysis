@@ -1,5 +1,5 @@
-07-17: Need to automate spark zeppelin queries.
+07-18: Need to automate spark zeppelin queries.
 	Would prefer not to be typing them in 
 	during presentation.
 
-07-18: should implement batch processing
+07-19: should implement batch processing
