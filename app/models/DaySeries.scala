@@ -12,6 +12,7 @@ import DB.session
 import DB.session.implicits._
 
 case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){        
+    dataframe.show()
     val datapoints = dataframe.rdd.map( row =>
         new Day(row)
     ).collect
@@ -29,7 +30,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         var country = filter_by("Country", country_name).dataframe
         country = dataframe.groupBy(dataframe("Date"))
             .agg(
-                first("Update"), // May cause errors; we'll see
+                first("Update").as("Update"), // May cause errors; we'll see
                 sum("Confirmed").as("Confirmed"),
                 sum("Deaths").as("Deaths"),
                 sum("Recovered").as("Recovered")
