@@ -7,22 +7,54 @@
     <div class="row">
       <div class="col-3 bold">
         <h5 class="text-center">
-          State
+          @if(column == "State" && order == "ASC"){
+            <a href="/country/states/@country/State/DESC">
+              State
+            </a>
+          }else{
+            <a href="/country/states/@country/State/ASC">
+              State
+            </a>
+          }
         </h5>
       </div>
       <div class="col-3 bold">
         <h5 class="text-center">
-          Confirmed
+          @if(column == "Confirmed" && order == "ASC"){
+            <a href="/country/states/@country/Confirmed/DESC">
+              Confirmed
+            </a>
+          }else{
+            <a href="/country/states/@country/Confirmed/ASC">
+              Confirmed
+            </a>
+          }
         </h5>
       </div>
       <div class="col-3 bold">
         <h5 class="text-center">
-          Recovered
+          @if(column == "Recovered" && order == "ASC"){
+            <a href="/country/states/@country/Recovered/DESC">
+              Recovered
+            </a>
+          }else{
+            <a href="/country/states/@country/Recovered/ASC">
+              Recovered
+            </a>
+          }
         </h5>
       </div>
       <div class="col-3 bold">
         <h5 class="text-center">
-          Deaths
+          @if(column == "Deaths" && order == "ASC"){
+            <a href="/country/states/@country/Deaths/DESC">
+              Deaths
+            </a>
+          }else{
+            <a href="/country/states/@country/Deaths/ASC">
+              Deaths
+            </a>
+          }
         </h5>
       </div> 
     </div>
