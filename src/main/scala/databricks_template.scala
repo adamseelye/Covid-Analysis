@@ -1,3 +1,5 @@
+// Can use these templates to read CSV in different ways: use where needed
+
 object databricks_template {
   def option1(): Unit = {
     import org.apache.commons.io.IOUtils
