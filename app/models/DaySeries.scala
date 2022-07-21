@@ -81,13 +81,20 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         return order_by("Recovered", order)
     }
 
-    def country_sums(): Array[models.CountrySum] = {
-        val sums = dataframe.groupBy("Country/Region")
+    def country_sums(order: String = "ASC"): Array[models.CountrySum] = {
+        var sums = dataframe.groupBy("Country/Region")
             .agg(
+                countDistinct("Province/State").as("States"),
                 sum("Recovered").as("Recovered"), 
                 sum("Deaths").as("Deaths"), 
                 sum("Confirmed").as("Confirmed")
             )
+
+        if(order == "ASC"){
+            sums = sums.sort(asc("Country/Region"))
+        }else{
+            sums = sums.sort(desc("Country/Region"))
+        }
 
         return sums.map(row => {new CountrySum(row)}).collect()
     }

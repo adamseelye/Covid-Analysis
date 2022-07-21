@@ -7,7 +7,6 @@ import scala.concurrent.ExecutionContext.Implicits._
 
 
 class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-
   def index = Action { implicit request =>
     Ok(views.html.index())
   }

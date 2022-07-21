@@ -5,3 +5,6 @@ GET        /                                            controllers.HomeControll
 ### Spark call test ###
 GET          /test/country/:country/:stat               controllers.Test.country(country: String, stat: String)
 GET          /test/state/:country/:state/:stat          controllers.Test.state(country: String, state: String, stat: String)
+
+### COUNTRY ###
+GET          /country/view                              controllers.Country.view()
