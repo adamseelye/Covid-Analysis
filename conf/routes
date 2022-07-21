@@ -4,6 +4,7 @@ GET        /                                            controllers.HomeControll
 
 ### Spark call test ###
 # NOTE: Tests probably don't work; Ironically, not tested.
+GET          /test/overall/:stat                        controllers.Test.overall(stat: String)
 GET          /test/country/:country/:stat               controllers.Test.country(country: String, stat: String)
 GET          /test/state/:country/:state/:stat          controllers.Test.state(country: String, state: String, stat: String)
 

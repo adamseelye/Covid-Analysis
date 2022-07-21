@@ -64,13 +64,19 @@
           @state.state
         </div>
         <div class="col-3">
-          @state.confirmed
+          <a href="/test/state/@country/@state.state/confirmed">
+            @state.confirmed
+          </a>
         </div>
         <div class="col-3">
-          @state.recovered
+          <a href="/test/state/@country/@state.state/recovered">
+            @state.recovered
+          </a>
         </div>
         <div class="col-3">
-          @state.deaths
+          <a href="/test/state/@country/@state.state/deaths">
+            @state.deaths
+          </a>
         </div>
       </div>
     }

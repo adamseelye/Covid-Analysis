@@ -28,25 +28,38 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
 
     def view_country(country_name: String): DaySeries = {
         var country = filter_by("Country", country_name).dataframe
-        country = dataframe.groupBy(dataframe("Date"))
-            .agg(
-                first("Update").as("Update"), // May cause errors; we'll see
-                sum("Confirmed").as("Confirmed"),
-                sum("Deaths").as("Deaths"),
-                sum("Recovered").as("Recovered")
-                )
-            .withColumn("SNo", 
-                lit(-1L)
-                )
-            .withColumn("State", 
-                lit("ALL")
-                )
-            .withColumn("Country", 
-                lit(country_name)
-                )
+        country = country.groupBy(country("Date"))
+          .agg(
+            first("Update").as("Update"), // May cause errors; we'll see
+            sum("Confirmed").as("Confirmed"),
+            sum("Deaths").as("Deaths"),
+            sum("Recovered").as("Recovered")
+          )
+          .withColumn("SNo", lit(-1L))
+          .withColumn("State", lit("ALL"))
+          .withColumn("Country", lit(country_name))
+        
         country.show()
 
         return DaySeries(country)
+    }
+
+    
+    def view_overall(): DaySeries = {
+      val overall = dataframe.groupBy(dataframe("Date"))
+        .agg(
+          first("Update").as("Update"), // May cause errors; we'll see
+          sum("Confirmed").as("Confirmed"),
+          sum("Deaths").as("Deaths"),
+          sum("Recovered").as("Recovered")
+        )
+        .withColumn("SNo", lit(-1L))
+        .withColumn("State", lit("ALL"))
+        .withColumn("Country", lit("ALL"))
+
+      overall.show()
+
+      return DaySeries(overall)
     }
 
     def state(state: String = "*"): DaySeries = {
