@@ -9,8 +9,13 @@ import scala.concurrent.ExecutionContext.Implicits._
 import models.DaySeries
 
 class Country @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-  def view() = Action { implicit request =>
-    val countries = models.Day.dayseries.country_sums()
+  def view(column: String = "Country", order: String = "ASC") = Action { implicit request =>
+    val countries = models.Day.dayseries.country_sums(column, order)
     Ok(views.html.country.view(countries))
+  }
+
+  def states(country: String = "ALL", column: String = "State", order: String = "ASC") = Action { implicit request =>
+    val states = models.Day.dayseries.state_sums(country, column, order)
+    Ok(views.html.country.states(states, country))
   }
 }

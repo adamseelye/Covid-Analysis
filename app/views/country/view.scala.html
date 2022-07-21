@@ -34,10 +34,14 @@
     @for(country <- countries){
       <div class="row">
         <div class="col-4">
-          @country.country
+          <a href="/countries/read/@country.country">
+            @country.country
+          </a>
         </div>
         <div class="col-2">
-          @country.states
+          <a href="/country/states/@country.country">
+            @country.states
+          </a>
         </div>
         <div class="col-2">
           @country.confirmed

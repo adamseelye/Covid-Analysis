@@ -22,14 +22,14 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     }
 
     def country(country_name: String = "*"): DaySeries = {
-        return filter_by("Country/Region", country_name)
+        return filter_by("Country", country_name)
     }
 
     def view_country(country_name: String): DaySeries = {
-        var country = filter_by("Country/Region", country_name).dataframe
-        country = dataframe.groupBy(dataframe("Observation Date"))
+        var country = filter_by("Country", country_name).dataframe
+        country = dataframe.groupBy(dataframe("Date"))
             .agg(
-                first("Last Update").as("Last Update"), // May cause errors; we'll see
+                first("Update"), // May cause errors; we'll see
                 sum("Confirmed").as("Confirmed"),
                 sum("Deaths").as("Deaths"),
                 sum("Recovered").as("Recovered")
@@ -37,10 +37,10 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
             .withColumn("SNo", 
                 lit(-1L)
                 )
-            .withColumn("Province/State", 
+            .withColumn("State", 
                 lit("ALL")
                 )
-            .withColumn("Country/Region", 
+            .withColumn("Country", 
                 lit(country_name)
                 )
         country.show()
@@ -49,7 +49,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     }
 
     def state(state: String = "*"): DaySeries = {
-        return filter_by("Province/State", state)
+        return filter_by("State", state)
     }
 
     // changing order
@@ -62,11 +62,11 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     }
 
     def by_date(order: String = "ASC"): DaySeries = {
-        return order_by("Observation Date", order)
+        return order_by("Date", order)
     }
 
     def by_last_update(order: String = "ASC"): DaySeries = {
-        return order_by("Last Update", order)
+        return order_by("Update", order)
     }
 
     def by_confirmed(order: String = "ASC"): DaySeries = {
@@ -81,32 +81,43 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         return order_by("Recovered", order)
     }
 
-    def country_sums(order: String = "ASC"): Array[models.CountrySum] = {
-        var sums = dataframe.groupBy("Country/Region")
+    def country_sums(column: String = "Country", order: String = "ASC"): Array[models.CountrySum] = {
+        var sums = dataframe.groupBy("Country")
             .agg(
-                countDistinct("Province/State").as("States"),
+                dataframe("Country"),
+                countDistinct("State").as("States"),
                 sum("Recovered").as("Recovered"), 
                 sum("Deaths").as("Deaths"), 
                 sum("Confirmed").as("Confirmed")
             )
 
         if(order == "ASC"){
-            sums = sums.sort(asc("Country/Region"))
+            sums = sums.sort(asc(column))
         }else{
-            sums = sums.sort(desc("Country/Region"))
+            sums = sums.sort(desc(column))
         }
 
         return sums.map(row => {new CountrySum(row)}).collect()
     }
 
     // sum by group?
-    def state_sums(): Array[models.StateSum] = {
-        val sums = dataframe.groupBy("Country/Region", "Province/State")
+    def state_sums(country: String = "ALL", column: String = "State", order: String = "ASC"): Array[models.StateSum] = {
+        var sums = dataframe.groupBy("Country", "State")
             .agg(
                 sum("Recovered").as("Recovered"), 
                 sum("Deaths").as("Deaths"), 
                 sum("Confirmed").as("Confirmed")
             )
+
+        if(country != "ALL"){
+            sums = sums.filter(sums("Country") === country)
+        }
+
+        if(order == "ASC"){
+            sums = sums.sort(asc(column))
+        }else{
+            sums = sums.sort(desc(column))
+        }
 
         return sums.map(row => new StateSum(row)).collect()
     }

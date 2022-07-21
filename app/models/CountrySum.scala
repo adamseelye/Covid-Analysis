@@ -14,7 +14,7 @@ case class CountrySum(country: String, states: Long, recovered: Long,
                       deaths: Long, confirmed: Long){
   def this(row: org.apache.spark.sql.Row) = {
     this(
-      row.getAs[String]("Country/Region"),
+      row.getAs[String]("Country"),
       row.getAs[Long]("States"),
       row.getAs[Long]("Recovered"),
       row.getAs[Long]("Deaths"),

@@ -8,3 +8,4 @@ GET          /test/state/:country/:state/:stat          controllers.Test.state(c
 
 ### COUNTRY ###
 GET          /country/view                              controllers.Country.view()
+GET          /country/states/:country                   controllers.Country.states(country: String)
