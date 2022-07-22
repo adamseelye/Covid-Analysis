@@ -46,7 +46,7 @@ Queries:
 	We expect to see a slow beginning to the pandemic followed
 	by explosive growth as the pandemic started to ramp up.
 	Eventually, new COVID case counts reach a plateau and then
-	begin to taper off; though they never reaches zero again as
+	begin to taper off; though they never reach zero again as
 	Coronavirus is still sporadically infecting populations around
 	the world. COVID deaths only ever increase but we expect 
 	to see a slow start followed by rapid growth and then an
