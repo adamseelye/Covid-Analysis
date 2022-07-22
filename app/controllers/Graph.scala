@@ -8,7 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits._
 // Spark
 import models.DaySeries
 
-class Test @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   // def country(country: String, stat: String) = Action { implicit request => 
   //   val dayseries = models.Day.dayseries.view_country(country).by_date()
   //   Ok(views.html.graph.country(dayseries, country, stat))

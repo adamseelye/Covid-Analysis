@@ -3,9 +3,9 @@ GET        /assets/*file                                controllers.Assets.versi
 GET        /                                            controllers.HomeController.index
 
 ### Spark call test ###
-GET          /test/overall/:stat                        controllers.Test.overall(stat: String)
-GET          /test/country/:country/:stat               controllers.Test.country(country: String, stat: String)
-GET          /test/state/:country/:state/:stat          controllers.Test.state(country: String, state: String, stat: String)
+GET          /test/overall/:stat                        controllers.TestController.overall(stat: String)
+GET          /test/country/:country/:stat               controllers.TestController.country(country: String, stat: String)
+GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
 
 ### COUNTRY ###
 GET          /country/view/:column/:order               controllers.Country.view(column: String, order: String)

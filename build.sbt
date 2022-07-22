@@ -27,7 +27,7 @@ dependencyOverrides ++= Seq(
 
 // The Play project itself
 lazy val root = (project in file("."))
-  .enablePlugins(Common, PlayScala)
+  .enablePlugins(Common, PlayScala, SbtWeb)
   .settings(
     name := """Play-with-Spark""",
   )
