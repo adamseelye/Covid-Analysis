@@ -25,6 +25,8 @@ dependencyOverrides ++= Seq(
   , "com.google.guava" % "guava" % "19.0"
 )
 
+pipelineStages := Seq(rjs)
+
 // The Play project itself
 lazy val root = (project in file("."))
   .enablePlugins(Common, PlayScala, SbtWeb)
