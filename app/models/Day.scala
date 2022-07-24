@@ -37,14 +37,10 @@ case class Day(id:Long = -1L,
 
 object Day {
     val session = DB.session
-<<<<<<< HEAD
+
     //val csv_path = "hdfs://localhost:9000/user/victorious/datapoints/covid_19_data.csv"
     val csv_path = "https://s3.us-east-2.amazonaws.com/covidanalysis/Data_setP2/covid_19_data.csv"
-
-=======
-    val csv_path = "hdfs://localhost:9000/user/victorious/datapoints/covid_19_data.csv"
     
->>>>>>> Roman-Graphs-0
     val schema = StructType(
         Array(
             StructField("SNo", LongType, nullable=false),
