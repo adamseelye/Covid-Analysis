@@ -11,13 +11,15 @@ import org.apache.spark.sql.functions.{desc, asc}
 import DB.session
 import DB.session.implicits._
 
-case class StateSum(country: String, recovered: Long, deaths: Long, confirmed: Long){
-    def this(row: org.apache.spark.sql.Row) = {
-        this(
-            row.getAs[String]("Country/Region"),
-            row.getAs[Long]("Recovered"),
-            row.getAs[Long]("Deaths"),
-            row.getAs[Long]("Confirmed")
-        )
-    }
+case class StateSum(country: String, state: String, recovered: Long, 
+  deaths: Long, confirmed: Long){
+  def this(row: org.apache.spark.sql.Row) = {
+    this(
+      row.getAs[String]("Country"),
+      row.getAs[String]("State"),
+      row.getAs[Long]("Recovered"),
+      row.getAs[Long]("Deaths"),
+      row.getAs[Long]("Confirmed")
+    )
+  }
 }

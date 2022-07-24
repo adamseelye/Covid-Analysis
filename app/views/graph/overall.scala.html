@@ -1,21 +1,29 @@
 @import helper._
-@(series: models.DaySeries, state: String, stat: String)(implicit request: RequestHeader)
+@(series: models.DaySeries, stat: String)(implicit request: RequestHeader)
 
-@common.layout(stat + " - " + state){
-    @common.message(request.flash, "Showing State - " + state)
+@common.layout(stat + " - Overall"){
+  @common.message(request.flash, "Showing Overall")
     <div class="container">
         <div class="row">
             <div class="col-3 bold">
-                Country
+                <h5 class="text-center">
+                    Country
+                </h5>
             </div>
             <div class="col-3 bold">
-                State
+                <h5 class="text-center">
+                    State
+                </h5>
             </div>
             <div class="col-3 bold">
-                Date
+                <h5 class="text-center">
+                    Date
+                </h5>
             </div>
             <div class="col-3 bold">
-                @stat
+                <h5 class="text-center">
+                    @stat.capitalize
+                </h5>
             </div>
         </div>
         @for(point <- series.datapoints){
@@ -27,7 +35,7 @@
                     @point.state
                 </div>
                 <div class="col-3">
-                    @point.date.toString()
+                    @point.date.toString
                 </div>
                 <div class="col-3">
                     @if(stat == "deaths"){
