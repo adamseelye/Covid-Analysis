@@ -1,8 +1,10 @@
 @import helper._
 @(series: models.DaySeries, stat: String)(implicit request: RequestHeader)
 
-@common.layout(stat + " - Overall"){
+@common.layout(stat + " - Overall", "test_graph.js"){
   @common.message(request.flash, "Showing Overall")
+  <canvas id="myChart" width="400" height="400">
+  </canvas>
     <div class="container">
         <div class="row">
             <div class="col-3 bold">
