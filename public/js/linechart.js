@@ -17,4 +17,4 @@ const myChart = new Chart(context, {
     }]
   }
 });
-console.log("Overall Graph Ran");
+console.log("Line Graph Ran");

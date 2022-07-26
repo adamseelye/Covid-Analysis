@@ -59,4 +59,20 @@ class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
     Ok(views.html.graph.state(dateseries, statseries, country, state, stat))
   }
+
+  def countries(stat: String) = Action { implicit request =>
+    val countrysums = models.Day.dayseries.country_sums(stat, "DESC", 25)
+    val countryseries = countrysums.map( cs => cs.country )
+    var statseries: Array[Long] = Array()
+
+    if(stat == "Deaths"){
+      statseries = countrysums.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = countrysums.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = countrysums.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.country_view(countryseries, statseries, stat))
+  }
 }
