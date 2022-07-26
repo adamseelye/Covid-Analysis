@@ -75,12 +75,12 @@
     @for(country <- countries){
       <div class="row">
         <div class="col-4">
-          <a href="/countries/read/@country.country">
+          <a class="disabled" href="/countries/read/@country.country">
             @country.country
           </a>
         </div>
         <div class="col-2">
-          <a href="/country/states/@country.country/State/ASC">
+          <a class="disabled" href="/country/states/@country.country/State/ASC">
             @country.states
           </a>
         </div>
@@ -88,15 +88,24 @@
           <a href="/test/country/@country.country/confirmed">
             @country.confirmed
           </a>
+          <a href="/graph/country/@country.country/Confirmed">
+            @icons.graph()
+          </a>
         </div>
         <div class="col-2">
           <a href="/test/country/@country.country/deaths">
             @country.deaths
-          </a>  
+          </a> 
+          <a href="/graph/country/@country.country/Deaths">
+            @icons.graph()
+          </a>
         </div>
         <div class="col-2">
           <a href="/test/country/@country.country/recovered">
             @country.recovered
+          </a>
+          <a href="/graph/country/@country.country/Recovered">
+            @icons.graph()
           </a>
         </div>
       </div>

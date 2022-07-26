@@ -9,20 +9,70 @@ import scala.concurrent.ExecutionContext.Implicits._
 import models.DaySeries
 
 class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-  // def country(country: String, stat: String) = Action { implicit request => 
-  //   val dayseries = models.Day.dayseries.view_country(country).by_date()
-  //   Ok(views.html.graph.country(dayseries, country, stat))
-  // }
-
-  // def state(country: String, state: String, stat: String) = Action { implicit request =>
-  //   val dayseries = models.Day.dayseries
-  //                     .country(country)
-  //                     .state(state).by_date()
-  //   Ok(views.html.graph.state(dayseries, state, stat))
-  // }
-
   def overall(stat: String) = Action { implicit request =>
-    val dayseries = models.Day.dayseries.view_overall().by_date()
-    Ok(views.html.graph.overall(dayseries, stat))
+    val datapoints = models.Day.dayseries.view_overall().by_date().datapoints
+    val dateseries = datapoints.map(day => day.date.toString)
+    var statseries: Array[Long] = Array()
+    
+    if(stat == "Deaths"){
+      statseries = datapoints.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = datapoints.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = datapoints.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.overall(dateseries, statseries, stat))
+  }
+
+  def country(country: String, stat: String) = Action { implicit request => 
+    val datapoints = models.Day.dayseries.view_country(country).by_date().datapoints
+    val dateseries = datapoints.map(day => day.date.toString)
+    var statseries: Array[Long] = Array()
+
+    if(stat == "Deaths"){
+      statseries = datapoints.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = datapoints.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = datapoints.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.country(dateseries, statseries, country, stat))
+  }
+
+  
+  def state(country: String, state: String, stat: String) = Action { implicit request =>
+    val datapoints = models.Day.dayseries
+                      .country(country)
+                      .state(state).by_date().datapoints
+    val dateseries = datapoints.map(day => day.date.toString)
+    var statseries: Array[Long] = Array()
+
+    if(stat == "Deaths"){
+      statseries = datapoints.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = datapoints.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = datapoints.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.state(dateseries, statseries, country, state, stat))
+  }
+
+  def countries(stat: String) = Action { implicit request =>
+    val countrysums = models.Day.dayseries.country_sums(stat, "DESC", 25)
+    val countryseries = countrysums.map( cs => cs.country )
+    var statseries: Array[Long] = Array()
+
+    if(stat == "Deaths"){
+      statseries = countrysums.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = countrysums.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = countrysums.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.country_view(countryseries, statseries, stat))
   }
 }

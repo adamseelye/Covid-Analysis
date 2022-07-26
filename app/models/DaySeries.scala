@@ -95,20 +95,30 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         return order_by("Recovered", order)
     }
 
-    def country_sums(column: String = "Country", order: String = "ASC"): Array[models.CountrySum] = {
+    // def top(n: Int): DaySeries = {
+    //     return DaySeries(dataframe.limit(n))
+    // }
+
+    // TODO: Ideally, I'd have a CountrySums collection that wrapped the datafame
+    // and returned that.
+    def country_sums(column: String = "Country", order: String = "ASC", limit: Int = -1): Array[models.CountrySum] = {
         var sums = dataframe.groupBy("Country")
             .agg(
                 dataframe("Country"),
                 countDistinct("State").as("States"),
-                sum("Recovered").as("Recovered"), 
-                sum("Deaths").as("Deaths"), 
-                sum("Confirmed").as("Confirmed")
+                max("Recovered").as("Recovered"), 
+                max("Deaths").as("Deaths"), 
+                max("Confirmed").as("Confirmed")
             )
 
         if(order == "ASC"){
             sums = sums.sort(asc(column))
         }else{
             sums = sums.sort(desc(column))
+        }
+
+        if(limit != -1){
+            sums = sums.limit(limit)
         }
 
         return sums.map(row => {new CountrySum(row)}).collect()

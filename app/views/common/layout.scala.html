@@ -1,10 +1,13 @@
-@(title: String)(body: Html)(implicit request: RequestHeader)
+@(title: String, script: String = "empty.js")(body: Html)(implicit request: RequestHeader)
 
 <!doctype html>
 <html lang="en">
 <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.versioned("css/nv.d3.css")">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/covidfavicon.png")">
+<link rel="stylesheet" href="@routes.Assets.versioned("css/test_graph.css")">
+<link rel="stylesheet" href="@routes.Assets.versioned("css/custom.css")">
+
 <head>
     <meta charset="utf-8">    
     <title>Covid Analysis - @title</title>
@@ -27,11 +30,18 @@
         </div>
     </div>
     <script src="@routes.Assets.versioned("js/bootstrap.bundle.min.js")" type="text/javascript"></script>
-    <link rel="script" href="@routes.Assets.versioned("js/chart.min.js")">
-    < <script
+    <script
+    type="text/javascript" 
+    src="@routes.Assets.versioned("js/chart.min.js")">
+    </script>
+    <script
     type="text/javascript"
     src=@routes.Assets.versioned("lib/requirejs/require.js").url
     data-main=@routes.Assets.versioned("js/main.js").url>
+    </script>
+    <script
+    type="text/javascript"
+    src="@routes.Assets.versioned("js/")@script">
     </script>
 </body>
 </html>

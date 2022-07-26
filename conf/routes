@@ -1,5 +1,6 @@
 # Assets
 GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+# Home
 GET        /                                            controllers.HomeController.index
 
 ### TEST ###
@@ -12,4 +13,9 @@ GET          /country/view/:column/:order               controllers.Country.view
 GET          /country/states/:country/:column/:order    controllers.Country.states(country: String, column: String, order: String)
 
 ### GRAPHS ###
+# Lines
 GET         /graph/overall/:stat                        controllers.Graph.overall(stat: String)
+GET         /graph/country/:country/:stat               controllers.Graph.country(country: String, stat: String)
+GET         /graph/state/:country/:state/:stat          controllers.Graph.state(country: String, state: String, stat: String)
+# Bars
+GET         /graph/countries/:stat                      controllers.Graph.countries(stat: String)
