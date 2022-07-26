@@ -128,9 +128,9 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     def state_sums(country: String = "ALL", column: String = "State", order: String = "ASC"): Array[models.StateSum] = {
         var sums = dataframe.groupBy("Country", "State")
             .agg(
-                sum("Recovered").as("Recovered"), 
-                sum("Deaths").as("Deaths"), 
-                sum("Confirmed").as("Confirmed")
+                max("Recovered").as("Recovered"), 
+                max("Deaths").as("Deaths"), 
+                max("Confirmed").as("Confirmed")
             )
 
         if(country != "ALL"){
