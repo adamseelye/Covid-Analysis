@@ -1,0 +1,84 @@
+@import helper._
+@(states: Array[models.StateSum], country: String, column: String, order: String)(implicit request: RequestHeader)
+
+@common.layout(country + " - States"){
+  @common.message(request.flash, "Showing States for " + country)
+  <div class="container">
+    <div class="row">
+      <div class="col-3 bold">
+        <h5 class="text-center">
+          @if(column == "State" && order == "ASC"){
+            <a href="/country/states/@country/State/DESC">
+              State
+            </a>
+          }else{
+            <a href="/country/states/@country/State/ASC">
+              State
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-3 bold">
+        <h5 class="text-center">
+          @if(column == "Confirmed" && order == "ASC"){
+            <a href="/country/states/@country/Confirmed/DESC">
+              Confirmed
+            </a>
+          }else{
+            <a href="/country/states/@country/Confirmed/ASC">
+              Confirmed
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-3 bold">
+        <h5 class="text-center">
+          @if(column == "Recovered" && order == "ASC"){
+            <a href="/country/states/@country/Recovered/DESC">
+              Recovered
+            </a>
+          }else{
+            <a href="/country/states/@country/Recovered/ASC">
+              Recovered
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-3 bold">
+        <h5 class="text-center">
+          @if(column == "Deaths" && order == "ASC"){
+            <a href="/country/states/@country/Deaths/DESC">
+              Deaths
+            </a>
+          }else{
+            <a href="/country/states/@country/Deaths/ASC">
+              Deaths
+            </a>
+          }
+        </h5>
+      </div> 
+    </div>
+    @for(state <- states){
+      <div class="row">
+        <div class="col-3">
+          @state.state
+        </div>
+        <div class="col-3">
+          <a href="/test/state/@country/@state.state/confirmed">
+            @state.confirmed
+          </a>
+        </div>
+        <div class="col-3">
+          <a href="/test/state/@country/@state.state/recovered">
+            @state.recovered
+          </a>
+        </div>
+        <div class="col-3">
+          <a href="/test/state/@country/@state.state/deaths">
+            @state.deaths
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+}

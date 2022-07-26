@@ -1,9 +1,15 @@
-GET        /                       controllers.HomeController.index
+# Assets
+GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+GET        /                                            controllers.HomeController.index
 
-# Spark call test
-GET        /test                   controllers.HomeController.test
-GET        /testA                  controllers.HomeController.testAsync
+### TEST ###
+GET          /test/overall/:stat                        controllers.TestController.overall(stat: String)
+GET          /test/country/:country/:stat               controllers.TestController.country(country: String, stat: String)
+GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
 
-# Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file        controllers.Assets.at(path="/public", file)
+### COUNTRY ###
+GET          /country/view/:column/:order               controllers.Country.view(column: String, order: String)
+GET          /country/states/:country/:column/:order    controllers.Country.states(country: String, column: String, order: String)
 
+### GRAPHS ###
+GET         /graph/overall/:stat                        controllers.Graph.overall(stat: String)

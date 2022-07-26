@@ -1,0 +1,25 @@
+package models
+
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.types.{StringType, StructField, StructType, LongType, DateType, TimestampType}
+import org.apache.spark.sql.functions._
+
+import org.apache.spark.sql.functions.{desc, asc}
+// import com.github.nscala_time.time.Imports._
+
+import DB.session
+import DB.session.implicits._
+
+case class StateSum(country: String, state: String, recovered: Long, 
+  deaths: Long, confirmed: Long){
+  def this(row: org.apache.spark.sql.Row) = {
+    this(
+      row.getAs[String]("Country"),
+      row.getAs[String]("State"),
+      row.getAs[Long]("Recovered"),
+      row.getAs[Long]("Deaths"),
+      row.getAs[Long]("Confirmed")
+    )
+  }
+}

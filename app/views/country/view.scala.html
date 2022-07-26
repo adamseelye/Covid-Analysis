@@ -1,0 +1,105 @@
+@import helper._
+@(countries: Array[models.CountrySum], column: String, order: String)(implicit request: RequestHeader)
+
+@common.layout("Countries"){
+  @common.message(request.flash, "Showing Countries")
+  <div class="container">
+    <div class="row">
+      <div class="col-4 bold">
+        <h5 class="text-center">
+          @if(column == "Country" && order == "ASC"){
+            <a href="/country/view/Country/DESC">
+              Country
+            </a>
+          }else{
+            <a href="/country/view/Country/ASC">
+              Country
+            </a>
+          }
+          </a>
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          @if(column == "States" && order == "ASC"){
+            <a href="/country/view/States/DESC">
+              States
+            </a>
+          }else{
+            <a href="/country/view/States/ASC">
+              States
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          @if(column == "Confirmed" && order == "ASC"){
+            <a href="/country/view/Confirmed/DESC">
+              Confirmed
+            </a>
+          }else{
+            <a href="/country/view/Confirmed/ASC">
+              Confirmed
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          @if(column == "Deaths" && order == "ASC"){
+            <a href="/country/view/Deaths/DESC">
+              Deaths
+            </a>
+          }else{
+            <a href="/country/view/Deaths/ASC">
+              Deaths
+            </a>
+          }
+        </h5>
+      </div>
+      <div class="col-2 bold">
+        <h5 class="text-center">
+          @if(column == "Recovered" && order == "ASC"){
+            <a href="/country/view/Recovered/DESC">
+              Recovered
+            </a>
+          }else{
+            <a href="/country/view/Recovered/ASC">
+              Recovered
+            </a>
+          }
+        </h5>
+      </div>
+    </div>
+    @for(country <- countries){
+      <div class="row">
+        <div class="col-4">
+          <a href="/countries/read/@country.country">
+            @country.country
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="/country/states/@country.country/State/ASC">
+            @country.states
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="/test/country/@country.country/confirmed">
+            @country.confirmed
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="/test/country/@country.country/deaths">
+            @country.deaths
+          </a>  
+        </div>
+        <div class="col-2">
+          <a href="/test/country/@country.country/recovered">
+            @country.recovered
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+}
