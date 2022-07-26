@@ -1,4 +1,4 @@
-const chart = document.getElementById("overallLinechart")
+const chart = document.getElementById("linechart")
 const context = chart.getContext("2d")
 const statseries = JSON.parse(chart.dataset.statseries)
 const stat = chart.dataset.stat

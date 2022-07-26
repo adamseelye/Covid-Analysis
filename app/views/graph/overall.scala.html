@@ -2,9 +2,9 @@
 @import play.api.libs.json.Json
 @(dateseries: Array[String], statseries: Array[Long], stat: String)(implicit request: RequestHeader)
 
-@common.layout(stat + " - Overall", "overall_graph.js"){
+@common.layout(stat + " - Overall", "linechart.js"){
   @common.message(request.flash, "Showing Overall")
-  <canvas id="overallLinechart" 
+  <canvas id="linechart" 
   width="400" 
   height="400" 
   data-dateseries="@Json.toJson(dateseries)"

@@ -13,3 +13,4 @@ GET          /country/states/:country/:column/:order    controllers.Country.stat
 
 ### GRAPHS ###
 GET         /graph/overall/:stat                        controllers.Graph.overall(stat: String)
+GET         /graph/country/:country/:stat               controllers.Graph.country(country: String, stat: String)

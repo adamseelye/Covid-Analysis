@@ -9,10 +9,6 @@ import scala.concurrent.ExecutionContext.Implicits._
 import models.DaySeries
 
 class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-  // def country(country: String, stat: String) = Action { implicit request => 
-  //   val dayseries = models.Day.dayseries.view_country(country).by_date()
-  //   Ok(views.html.graph.country(dayseries, country, stat))
-  // }
 
   // def state(country: String, state: String, stat: String) = Action { implicit request =>
   //   val dayseries = models.Day.dayseries
@@ -34,5 +30,21 @@ class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
     }
 
     Ok(views.html.graph.overall(dateseries, statseries, stat))
+  }
+
+  def country(country: String, stat: String) = Action { implicit request => 
+    val datapoints = models.Day.dayseries.view_country(country).by_date().datapoints
+    val dateseries = datapoints.map(day => day.date.toString)
+    var statseries: Array[Long] = Array()
+
+    if(stat == "Deaths"){
+      statseries = datapoints.map(day => day.deaths)
+    }else if(stat == "Recovered"){
+      statseries = datapoints.map(day => day.recovered)
+    }else if(stat == "Confirmed"){
+      statseries = datapoints.map(day => day.confirmed)
+    }
+
+    Ok(views.html.graph.country(dateseries, statseries, country, stat))
   }
 }
