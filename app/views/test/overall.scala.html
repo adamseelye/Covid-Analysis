@@ -1,8 +1,11 @@
 @import helper._
 @(series: models.DaySeries, stat: String)(implicit request: RequestHeader)
 
-@common.layout(stat + " - Overall"){
+@common.layout(stat.capitalize + " - Overall"){
   @common.message(request.flash, "Showing Overall")
+<a href="/graph/overall/@stat.capitalize">
+  @icons.graph
+</a>
     <div class="container">
         <div class="row">
             <div class="col-3 bold">
