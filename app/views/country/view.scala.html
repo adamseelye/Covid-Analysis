@@ -43,9 +43,6 @@
               Confirmed
             </a>
           }
-            <a href="/graph/countries/Confirmed">
-              @icons.bar()
-            </a>
         </h5>
       </div>
       <div class="col-2 bold">
@@ -59,9 +56,6 @@
               Deaths
             </a>
           }
-          <a href="/graph/countries/Deaths">
-            @icons.bar()
-          </a>
         </h5>
       </div>
       <div class="col-2 bold">
@@ -75,21 +69,18 @@
               Recovered
             </a>
           }
-          <a href="/graph/countries/Recovered">
-            @icons.bar()
-          </a>
         </h5>
       </div>
     </div>
     @for(country <- countries){
       <div class="row">
         <div class="col-4">
-          <a href="/countries/read/@country.country">
+          <a class="disabled" href="/countries/read/@country.country">
             @country.country
           </a>
         </div>
         <div class="col-2">
-          <a href="/country/states/@country.country/State/ASC">
+          <a class="disabled" href="/country/states/@country.country/State/ASC">
             @country.states
           </a>
         </div>
