@@ -10,3 +10,4 @@ target
 /RUNNING_PID
 
 /.vscode
+/.metastore_db
