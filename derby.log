@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Tue Jul 26 08:56:09 EDT 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0182-3a94-3c83-000023bc0920 
-on database directory /mnt/c/code/covid-project/project_2/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@36ecba37 
+Tue Jul 26 09:15:03 EDT 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0182-3aa5-8a63-00001fe2bf88 
+on database directory /mnt/c/code/covid-project/project_2/metastore_db with class loader org.apache.spark.sql.hive.client.IsolatedClientLoader$$anon$1@233fb5ad 
 Loaded from file:/home/roman/.ivy2/cache/org.apache.derby/derby/jars/derby-10.10.2.0.jar
 java.vendor=Private Build
 java.runtime.version=1.8.0_312-8u312-b07-0ubuntu1~18.04-b07
