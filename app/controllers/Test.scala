@@ -8,10 +8,8 @@ import scala.concurrent.ExecutionContext.Implicits._
 // Spark
 import models.DaySeries
 
-class Test @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-  def country(country: String, stat: String) = Action { implicit request =>
-    // TODO: It looks like we're getting multiple inputs for the same date for
-    // because of the value 
+class TestController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+  def country(country: String, stat: String) = Action { implicit request => 
     val dayseries = models.Day.dayseries.view_country(country).by_date()
     Ok(views.html.test.country(dayseries, country, stat))
   }
@@ -23,16 +21,8 @@ class Test @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
     Ok(views.html.test.state(dayseries, state, stat))
   }
 
-  // def state(string: State, stat: String) = Action { implicit request =>
-  //   val stat_view: Map = Map(
-  //     "deaths" -> views.html.test.state.deaths,
-  //     "confirmed" -> views.html.test.state.confirmed,
-  //     "recovered" -> views.html.test.state.recovered
-  //   )
-
-  //   val timeseries = models.DataPoint.timeseries.state(state).by_date()
-  //   val page = stat_view(stat)
-
-  //   Ok(page)
-  // }
+  def overall(stat: String) = Action { implicit request =>
+    val dayseries = models.Day.dayseries.view_overall().by_date()
+    Ok(views.html.test.overall(dayseries, stat))
+  }
 }

@@ -10,6 +10,9 @@ import org.apache.spark.sql.functions.{desc, asc}
 
 import com.github.nscala_time.time.Imports._
 
+import java.net.URL
+import org.apache.spark.SparkFiles
+
 import DB.session
 
 case class Day(id:Long = -1L, 
@@ -21,10 +24,10 @@ case class Day(id:Long = -1L,
   def this(row: org.apache.spark.sql.Row) = {
     this(
       row.getAs[Long]("SNo"),
-      row.getAs[java.sql.Date]("Observation Date"),
-      row.getAs[String]("Province/State"),
-      row.getAs[String]("Country/Region"),
-      row.getAs[java.sql.Timestamp]("Last Update"),
+      row.getAs[java.sql.Date]("Date"),
+      row.getAs[String]("State"),
+      row.getAs[String]("Country"),
+      row.getAs[java.sql.Timestamp]("Update"),
       row.getAs[Long]("Confirmed"),
       row.getAs[Long]("Deaths"),
       row.getAs[Long]("Recovered")
@@ -34,9 +37,10 @@ case class Day(id:Long = -1L,
 
 object Day {
     val session = DB.session
+
     //val csv_path = "hdfs://localhost:9000/user/victorious/datapoints/covid_19_data.csv"
     val csv_path = "https://s3.us-east-2.amazonaws.com/covidanalysis/Data_setP2/covid_19_data.csv"
-
+    
     val schema = StructType(
         Array(
             StructField("SNo", LongType, nullable=false),
@@ -50,19 +54,23 @@ object Day {
         )
     )
 
-    // TODO:  Pass in the schema when getting from csv
+    val urlfile="https://s3.us-east-2.amazonaws.com/covidanalysis/Data_setP2/covid_19_data.csv"
+    session.sparkContext.addFile(urlfile)
+
     var dataframe = session
-        .read.schema(schema).format("csv")
+        .read
+        .schema(schema)
+        .format("csv")
         .option("header", "true")
-        .load(csv_path)
+        .load("file://"+SparkFiles.get("covid_19_data.csv"))
     
     // Not sure how else to parse the date and timestamp
     dataframe = dataframe.select(
         dataframe("SNo"),
-        to_date(dataframe("Observation Date"), "MM/dd/yyyy").as("Observation Date"),
-        dataframe("Province/State"),
-        dataframe("Country/Region"),
-        to_timestamp(dataframe("Last Update"), "MM/dd/yyyy HH:mm").as("Last Update"),
+        to_date(dataframe("Observation Date"), "MM/dd/yyyy").as("Date"),
+        dataframe("Province/State").as("State"),
+        dataframe("Country/Region").as("Country"),
+        to_timestamp(dataframe("Last Update"), "MM/dd/yyyy HH:mm").as("Update"),
         dataframe("Confirmed"),
         dataframe("Deaths"),
         dataframe("Recovered")

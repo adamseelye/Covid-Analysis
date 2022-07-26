@@ -1,10 +1,21 @@
 # Assets
 GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+# Home
 GET        /                                            controllers.HomeController.index
 
-### Spark call test ###
-GET          /test/country/:country/:stat               controllers.Test.country(country: String, stat: String)
-GET          /test/state/:country/:state/:stat          controllers.Test.state(country: String, state: String, stat: String)
+### TEST ###
+GET          /test/overall/:stat                        controllers.TestController.overall(stat: String)
+GET          /test/country/:country/:stat               controllers.TestController.country(country: String, stat: String)
+GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
 
 ### COUNTRY ###
-GET          /country/view                              controllers.Country.view()
+GET          /country/view/:column/:order               controllers.Country.view(column: String, order: String)
+GET          /country/states/:country/:column/:order    controllers.Country.states(country: String, column: String, order: String)
+
+### GRAPHS ###
+# Lines
+GET         /graph/overall/:stat                        controllers.Graph.overall(stat: String)
+GET         /graph/country/:country/:stat               controllers.Graph.country(country: String, stat: String)
+GET         /graph/state/:country/:state/:stat          controllers.Graph.state(country: String, state: String, stat: String)
+# Bars
+GET         /graph/countries/:stat                      controllers.Graph.countries(stat: String)

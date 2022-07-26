@@ -1,0 +1,14 @@
+@import helper._
+@import play.api.libs.json.Json
+@(dateseries: Array[String], statseries: Array[Long], stat: String)(implicit request: RequestHeader)
+
+@common.layout(stat + " - Overall", "linechart.js"){
+  @common.message(request.flash, "Showing Overall")
+  <canvas id="linechart" 
+  width="400" 
+  height="400" 
+  data-dateseries="@Json.toJson(dateseries)"
+  data-statseries="@Json.toJson(statseries)"
+  data-stat="@stat">
+  </canvas>
+}
