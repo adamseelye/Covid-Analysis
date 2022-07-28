@@ -5,7 +5,7 @@
   @common.message(request.flash, "Showing Countries")
   <div class="container">
     <div class="row">
-      <div class="col-4 bold">
+      <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Country" && order == "ASC"){
             <a href="/country/view/Country/DESC/0">
@@ -19,7 +19,7 @@
           </a>
         </h5>
       </div>
-      <div class="col-2 bold">
+      <div class="col-1 bold">
         <h5 class="text-center">
           @if(column == "States" && order == "ASC"){
             <a href="/country/view/States/DESC/0">
@@ -32,6 +32,7 @@
           }
         </h5>
       </div>
+      <div class="col-1"></div>
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Confirmed" && order == "ASC"){
@@ -45,6 +46,7 @@
           }
         </h5>
       </div>
+      <div class="col-1"></div>
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Deaths" && order == "ASC"){
@@ -58,6 +60,7 @@
           }
         </h5>
       </div>
+      <div class="col-1"></div>
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Recovered" && order == "ASC"){
@@ -74,20 +77,22 @@
     </div>
     @for(country <- countries.datapoints){
       <div class="row">
-        <div class="col-4">
+        <div class="col-2">
           <a class="disabled" href="/countries/read/@country.country">
             @country.country
           </a>
         </div>
-        <div class="col-2">
+        <div class="col-1 text-center">
           <a href="/country/states/@country.country/State/ASC">
             @country.states
           </a>
         </div>
-        <div class="col-2">
+        <div class="col-2 text-end">
           <a href="/test/country/@country.country/confirmed">
             @country.confirmed
           </a>
+        </div>
+        <div class="col-1">
           @if(country.confirmed != 0){
             <a href="/graph/country/@country.country/Confirmed">
               @icons.graph()
@@ -99,10 +104,12 @@
             }
           }
         </div>
-        <div class="col-2">
+        <div class="col-2 text-end">
           <a href="/test/country/@country.country/deaths">
             @country.deaths
           </a>
+        </div>
+        <div class="col-1">
           @if(country.deaths != 0){
             <a href="/graph/country/@country.country/Deaths">
               @icons.graph()
@@ -114,10 +121,12 @@
             }
           }
         </div>
-        <div class="col-2">
+        <div class="col-2 text-end">
           <a href="/test/country/@country.country/recovered">
             @country.recovered
           </a>
+        </div>
+        <div class="col-1">
           @if(country.recovered != 0){
             <a href="/graph/country/@country.country/Recovered">
               @icons.graph()
