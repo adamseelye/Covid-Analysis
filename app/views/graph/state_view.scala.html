@@ -1,0 +1,14 @@
+@import helper._
+@import play.api.libs.json.Json
+@(country: String, stateseries: Array[String], statseries: Array[Long], stat: String)(implicit request: RequestHeader)
+
+@common.layout(country + " " + stat + " by State", "barchart.js"){
+  @common.message(request.flash, "Showing " + stat + " by state")
+  <canvas id="barchart" 
+  width="400" 
+  height="400" 
+  data-countryseries="@Json.toJson(stateseries)"
+  data-statseries="@Json.toJson(statseries)"
+  data-stat="@stat">
+  </canvas>
+}

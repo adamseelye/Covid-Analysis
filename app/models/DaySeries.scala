@@ -149,7 +149,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
     }
 
     // sum by group?
-    def state_sums(country: String = "ALL", column: String = "State", order: String = "ASC"): Array[models.StateSum] = {
+    def state_sums(country: String = "ALL", column: String = "State", order: String = "ASC", limit: Int = -1): Array[models.StateSum] = {
         var sums = dataframe.groupBy("Country", "State")
             .agg(
                 max("Recovered").as("Recovered"), 
@@ -165,6 +165,10 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
             sums = sums.sort(asc(column))
         }else{
             sums = sums.sort(desc(column))
+        }
+
+        if(limit != -1){
+            sums = sums.limit(limit)
         }
 
         return sums.map(row => new StateSum(row)).collect()

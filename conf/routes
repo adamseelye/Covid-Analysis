@@ -19,3 +19,4 @@ GET         /graph/country/:country/:stat               controllers.Graph.countr
 GET         /graph/state/:country/:state/:stat          controllers.Graph.state(country: String, state: String, stat: String)
 # Bars
 GET         /graph/countries/:stat                      controllers.Graph.countries(stat: String)
+GET         /graph/states/:country/:stat                controllers.Graph.states(country: String, stat: String)
