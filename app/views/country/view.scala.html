@@ -88,34 +88,46 @@
           <a href="/test/country/@country.country/confirmed">
             @country.confirmed
           </a>
-          <a href="/graph/country/@country.country/Confirmed">
-            @icons.graph()
-          </a>
-          <a href="/graph/states/@country.country/Confirmed">
-            @icons.bar()
-          </a>
+          @if(country.confirmed != 0){
+            <a href="/graph/country/@country.country/Confirmed">
+              @icons.graph()
+            </a>
+            @if(country.states != 0){
+              <a href="/graph/states/@country.country/Confirmed">
+                @icons.bar()
+              </a>
+            }
+          }
         </div>
         <div class="col-2">
           <a href="/test/country/@country.country/deaths">
             @country.deaths
-          </a> 
-          <a href="/graph/country/@country.country/Deaths">
-            @icons.graph()
           </a>
-          <a href="/graph/states/@country.country/Deaths">
-            @icons.bar()
-          </a>
+          @if(country.deaths != 0){
+            <a href="/graph/country/@country.country/Deaths">
+              @icons.graph()
+            </a>
+            @if(country.states != 0){
+              <a href="/graph/states/@country.country/Deaths">
+                @icons.bar()
+              </a>
+            }
+          }
         </div>
         <div class="col-2">
           <a href="/test/country/@country.country/recovered">
             @country.recovered
           </a>
-          <a href="/graph/country/@country.country/Recovered">
-            @icons.graph()
-          </a>
-          <a href="/graph/states/@country.country/Recovered">
-            @icons.bar()
-          </a>
+          @if(country.recovered != 0){
+            <a href="/graph/country/@country.country/Recovered">
+              @icons.graph()
+            </a>
+            @if(country.states != 0){
+              <a href="/graph/states/@country.country/Recovered">
+                @icons.bar()
+              </a>
+            }
+          }
         </div>
       </div>
     }
