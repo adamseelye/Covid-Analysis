@@ -1,14 +1,14 @@
-@(subdomain: String, stat: String, site_page: Int, pages: Int)(implicit request: RequestHeader)
+@(route: String, stat: String, column: String, order: String, site_page: Int, pages: Int)(implicit request: RequestHeader)
 
 <nav>
   <ul class="pagination pagination-sm justify-content-center">
     <li class="page-item">
       @if(0 == site_page){
-          <a class="page-link disabled" href="/@subdomain/@stat/@(site_page - 1)" aria-label="Previous">
+          <a class="page-link disabled" href="/@route/@stat/@column/@order/@(site_page - 1)" aria-label="Previous">
             @icons.left_arrow()
           </a>
       }else{
-        <a class="page-link" href="/@subdomain/@stat/@(site_page - 1)" aria-label="Previous">
+        <a class="page-link" href="/@route/@stat/@column/@order/@(site_page - 1)" aria-label="Previous">
           @icons.left_arrow()
         </a>
       }
@@ -16,11 +16,11 @@
     @for(page_number <- 0 to pages){
       <li class="page-item">
         @if(page_number == site_page){
-          <a class="page-link active" href="/@subdomain/@stat/@page_number">
+          <a class="page-link active" href="/@route/@stat/@column/@order/@page_number">
             @page_number
           </a>
         }else{
-          <a class="page-link" href="/@subdomain/@stat/@page_number">
+          <a class="page-link" href="/@route/@stat/@column/@order/@page_number">
             @page_number
           </a>
         }
@@ -28,11 +28,11 @@
     }
     <li class="page-item">
       @if(pages == site_page){
-        <a class="page-link disabled" href="/@subdomain/@stat/@(site_page - 1)" aria-label="Previous">
+        <a class="page-link disabled" href="/@route/@stat/@column/@order/@(site_page + 1)" aria-label="Previous">
           @icons.right_arrow()
         </a>
       }else{
-        <a class="page-link" href="/@subdomain/@stat/@(site_page + 1)">
+        <a class="page-link" href="/@route/@stat/@column/@order/@(site_page + 1)">
           @icons.right_arrow()
         </a>
       }
