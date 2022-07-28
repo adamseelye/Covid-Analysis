@@ -21,8 +21,8 @@ class TestController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.test.state(dayseries, state, stat))
   }
 
-  def overall(stat: String) = Action { implicit request =>
-    val dayseries = models.Day.dayseries.view_overall().by_date()
-    Ok(views.html.test.overall(dayseries, stat))
+  def overall(stat: String, page: Int) = Action { implicit request =>
+    val data = models.Day.dayseries.view_overall().by_date()
+    Ok(views.html.test.overall(data.page(page), stat, page, data.pages()))
   }
 }

@@ -85,23 +85,4 @@ object Day {
     // Default Datapoint is intentionally weird; effectively an exception,
     // handle it somehow.
     val empty = new Day()  
-
-    // Called for debugging; if you really want some datapoints, use view
-    // instead.
-    def show() = {
-        dataframe = session.sql("SELECT DISTINCT * FROM root ORDER BY root")
-        dataframe.show()
-    }
-
-    def country(country: String = "*"): models.DaySeries = {
-        return dayseries.country(country)
-    }
-
-    def state(state: String = "*"): models.DaySeries = {
-        return dayseries.state(state)
-    }
-
-    def country_sums(): Array[models.CountrySum] = {
-        return dayseries.country_sums()
-    }
 }

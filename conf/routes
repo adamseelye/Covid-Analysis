@@ -4,7 +4,7 @@ GET        /assets/*file                                controllers.Assets.versi
 GET        /                                            controllers.HomeController.index
 
 ### TEST ###
-GET          /test/overall/:stat                        controllers.TestController.overall(stat: String)
+GET          /test/overall/:stat/:page                  controllers.TestController.overall(stat: String, page: Int)
 GET          /test/country/:country/:stat               controllers.TestController.country(country: String, stat: String)
 GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
 

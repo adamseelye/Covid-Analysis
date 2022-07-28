@@ -4,6 +4,7 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.types.{StringType, StructField, StructType, LongType, DateType, TimestampType}
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.expressions.Window
 
 import org.apache.spark.sql.functions.{desc, asc}
 // import com.github.nscala_time.time.Imports._
@@ -11,11 +12,22 @@ import org.apache.spark.sql.functions.{desc, asc}
 import DB.session
 import DB.session.implicits._
 
-case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){        
+case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
+    val page_length = 25
+
     dataframe.show()
-    val datapoints = dataframe.rdd.map( row =>
-        new Day(row)
-    ).collect
+
+    def datapoints(): Array[Day] = {
+        return dataframe.rdd.map( row => new Day(row)).collect
+    }
+
+    def length(): Int = {
+        return dataframe.count.toInt
+    }
+
+    def pages(): Int = {
+        return (length() / page_length).toInt
+    }
 
     // filter
     def filter_by(column_name: String, value: String = "*"): DaySeries = {
@@ -95,9 +107,21 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         return order_by("Recovered", order)
     }
 
-    // def top(n: Int): DaySeries = {
-    //     return DaySeries(dataframe.limit(n))
-    // }
+    def page(index: Int, size: Int = 20): DaySeries = {
+        val window  = Window.partitionBy(lit("a")).orderBy(lit("a"))
+        val indexed = dataframe.withColumn(
+            "row_num",
+            row_number().over(window)
+            )
+        
+        val start = index * size 
+        val end = (index + 1) * size
+        println(start)
+        println(end)
+        return DaySeries(
+            indexed.filter(col("row_num").between(start, end))
+        )
+    }
 
     // TODO: Ideally, I'd have a CountrySums collection that wrapped the datafame
     // and returned that.
