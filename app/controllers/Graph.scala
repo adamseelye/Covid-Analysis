@@ -61,34 +61,34 @@ class Graph @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
   }
 
   def countries(stat: String) = Action { implicit request =>
-    val countrysums = models.Day.dayseries.country_sums(stat, "DESC", 25)
+    val countrysums = models
+                      .Day
+                      .dayseries
+                      .country_series(stat, "DESC", 25)
+                      .datapoints
     val countryseries = countrysums.map( cs => cs.country )
     var statseries: Array[Long] = Array()
 
-    if(stat == "Deaths"){
-      statseries = countrysums.map(cs => cs.deaths)
-    }else if(stat == "Recovered"){
-      statseries = countrysums.map(cs => cs.recovered)
-    }else if(stat == "Confirmed"){
-      statseries = countrysums.map(cs => cs.confirmed)
-    }
+    if(stat == "Deaths"){statseries = countrysums.map(cs => cs.deaths)}
+    else if(stat == "Recovered"){statseries = countrysums.map(cs => cs.recovered)}
+    else if(stat == "Confirmed"){statseries = countrysums.map(cs => cs.confirmed)}
 
     Ok(views.html.graph.country_view(countryseries, statseries, stat))
   }
 
 
   def states(country: String = "ALL", stat: String) = Action { implicit request =>
-    val statesums = models.Day.dayseries.state_sums(country, stat, "DESC", 25)
+    val statesums = models
+                    .Day
+                    .dayseries
+                    .state_series(country, stat, "DESC", 25)
+                    .datapoints
     val stateseries = statesums.map( ss => ss.state )
     var statseries: Array[Long] = Array()
 
-    if(stat == "Deaths"){
-      statseries = statesums.map(ss => ss.deaths)
-    }else if(stat == "Recovered"){
-      statseries = statesums.map(ss => ss.recovered)
-    }else if(stat == "Confirmed"){
-      statseries = statesums.map(ss => ss.confirmed)
-    }
+    if(stat == "Deaths"){statseries = statesums.map(ss => ss.deaths)}
+    else if(stat == "Recovered"){statseries = statesums.map(ss => ss.recovered)}
+    else if(stat == "Confirmed"){statseries = statesums.map(ss => ss.confirmed)}
 
     Ok(views.html.graph.state_view(country, stateseries, statseries, stat))
   }

@@ -7,7 +7,6 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.expressions.Window
 
 import org.apache.spark.sql.functions.{desc, asc}
-// import com.github.nscala_time.time.Imports._
 
 import DB.session
 import DB.session.implicits._
@@ -53,7 +52,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
         
         country.show()
 
-        return DaySeries(country)
+        return new DaySeries(country)
     }
 
     
@@ -71,7 +70,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
 
       overall.show()
 
-      return DaySeries(overall)
+      return new DaySeries(overall)
     }
 
     def state(state: String = "*"): DaySeries = {
@@ -125,52 +124,49 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
 
     // TODO: Ideally, I'd have a CountrySums collection that wrapped the datafame
     // and returned that.
-    def country_sums(column: String = "Country", order: String = "ASC", limit: Int = -1): Array[models.CountrySum] = {
-        var sums = dataframe.groupBy("Country")
-            .agg(
-                dataframe("Country"),
-                countDistinct("State").as("States"),
-                max("Recovered").as("Recovered"), 
-                max("Deaths").as("Deaths"), 
-                max("Confirmed").as("Confirmed")
-            )
+    def country_series(column: String = "Country", 
+                      order: String = "ASC", 
+                      limit: Int = -1): CountrySeries = {
+      var sums = dataframe
+                .groupBy("Country")
+                .agg(
+                  dataframe("Country"),
+                  countDistinct("State").as("States"),
+                  max("Recovered").as("Recovered"), 
+                  max("Deaths").as("Deaths"), 
+                  max("Confirmed").as("Confirmed")
+                )
 
-        if(order == "ASC"){
-            sums = sums.sort(asc(column))
-        }else{
-            sums = sums.sort(desc(column))
-        }
+      if(order == "ASC"){sums = sums.sort(asc(column))}
+      else{sums = sums.sort(desc(column))}
 
-        if(limit != -1){
-            sums = sums.limit(limit)
-        }
+      if(limit != -1){sums = sums.limit(limit)}
 
-        return sums.map(row => {new CountrySum(row)}).collect()
+      return new CountrySeries(sums)
     }
 
     // sum by group?
-    def state_sums(country: String = "ALL", column: String = "State", order: String = "ASC", limit: Int = -1): Array[models.StateSum] = {
-        var sums = dataframe.groupBy("Country", "State")
-            .agg(
-                max("Recovered").as("Recovered"), 
-                max("Deaths").as("Deaths"), 
-                max("Confirmed").as("Confirmed")
-            )
+    def state_series(country: String = "ALL", 
+                    column: String = "State", 
+                    order: String = "ASC", 
+                    limit: Int = -1): StateSeries = {
+      var sums = dataframe
+                .groupBy("Country", "State")
+                .agg(
+                  max("Recovered").as("Recovered"), 
+                  max("Deaths").as("Deaths"), 
+                  max("Confirmed").as("Confirmed")
+                )
 
-        if(country != "ALL"){
-            sums = sums.filter(sums("Country") === country)
-        }
+      if(country != "ALL"){
+        sums = sums.filter(sums("Country") === country)
+      }
 
-        if(order == "ASC"){
-            sums = sums.sort(asc(column))
-        }else{
-            sums = sums.sort(desc(column))
-        }
+      if(order == "ASC"){sums = sums.sort(asc(column))}
+      else{sums = sums.sort(desc(column))}
 
-        if(limit != -1){
-            sums = sums.limit(limit)
-        }
+      if(limit != -1){sums = sums.limit(limit)}
 
-        return sums.map(row => new StateSum(row)).collect()
+      return StateSeries(sums)
     }
 }

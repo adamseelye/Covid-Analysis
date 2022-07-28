@@ -37,9 +37,6 @@ case class Day(id:Long = -1L,
 
 object Day {
     val session = DB.session
-
-    //val csv_path = "hdfs://localhost:9000/user/victorious/datapoints/covid_19_data.csv"
-    val csv_path = "https://s3.us-east-2.amazonaws.com/covidanalysis/Data_setP2/covid_19_data.csv"
     
     val schema = StructType(
         Array(
@@ -53,7 +50,13 @@ object Day {
             StructField("Recovered", LongType, nullable=false)
         )
     )
-
+    // Default Datapoint is intentionally weird; effectively an exception,
+    // handle it somehow.
+    val empty = new Day()  
+    
+    // TODO: Probably move all of this into the DaySeries object:
+    // it would break too much to do on a whim, but it just makes sense.
+        //val csv_path = "hdfs://localhost:9000/user/victorious/datapoints/covid_19_data.csv"
     val urlfile="https://s3.us-east-2.amazonaws.com/covidanalysis/Data_setP2/covid_19_data.csv"
     session.sparkContext.addFile(urlfile)
 
@@ -76,13 +79,9 @@ object Day {
         dataframe("Recovered")
     )
 
-
     dataframe.cache() // in case we do CRUD
     dataframe.createOrReplaceTempView("datapoint")
     
     val dayseries = new DaySeries(dataframe)
-
-    // Default Datapoint is intentionally weird; effectively an exception,
-    // handle it somehow.
-    val empty = new Day()  
+    ////////////////////////////////////////////////
 }

@@ -1,5 +1,5 @@
 @import helper._
-@(countries: Array[models.CountrySum], column: String, order: String)(implicit request: RequestHeader)
+@(countries: CountrySeries, column: String, order: String, site_page: Int, pages: Int)(implicit request: RequestHeader)
 
 @common.layout("Countries"){
   @common.message(request.flash, "Showing Countries")
@@ -8,11 +8,11 @@
       <div class="col-4 bold">
         <h5 class="text-center">
           @if(column == "Country" && order == "ASC"){
-            <a href="/country/view/Country/DESC">
+            <a href="/country/view/Country/DESC/0">
               Country
             </a>
           }else{
-            <a href="/country/view/Country/ASC">
+            <a href="/country/view/Country/ASC/0">
               Country
             </a>
           }
@@ -22,11 +22,11 @@
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "States" && order == "ASC"){
-            <a href="/country/view/States/DESC">
+            <a href="/country/view/States/DESC/0">
               States
             </a>
           }else{
-            <a href="/country/view/States/ASC">
+            <a href="/country/view/States/ASC/0">
               States
             </a>
           }
@@ -35,11 +35,11 @@
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Confirmed" && order == "ASC"){
-            <a href="/country/view/Confirmed/DESC">
+            <a href="/country/view/Confirmed/DESC/0">
               Confirmed
             </a>
           }else{
-            <a href="/country/view/Confirmed/ASC">
+            <a href="/country/view/Confirmed/ASC/0">
               Confirmed
             </a>
           }
@@ -48,11 +48,11 @@
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Deaths" && order == "ASC"){
-            <a href="/country/view/Deaths/DESC">
+            <a href="/country/view/Deaths/DESC/0">
               Deaths
             </a>
           }else{
-            <a href="/country/view/Deaths/ASC">
+            <a href="/country/view/Deaths/ASC/0">
               Deaths
             </a>
           }
@@ -61,18 +61,18 @@
       <div class="col-2 bold">
         <h5 class="text-center">
           @if(column == "Recovered" && order == "ASC"){
-            <a href="/country/view/Recovered/DESC">
+            <a href="/country/view/Recovered/DESC/0">
               Recovered
             </a>
           }else{
-            <a href="/country/view/Recovered/ASC">
+            <a href="/country/view/Recovered/ASC/0">
               Recovered
             </a>
           }
         </h5>
       </div>
     </div>
-    @for(country <- countries){
+    @for(country <- countries.datapoints){
       <div class="row">
         <div class="col-4">
           <a class="disabled" href="/countries/read/@country.country">
@@ -131,5 +131,6 @@
         </div>
       </div>
     }
+    @common.pagination("country/view", column, order, site_page, pages)
   </div>
 }

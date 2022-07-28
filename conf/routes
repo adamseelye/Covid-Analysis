@@ -9,7 +9,7 @@ GET          /test/country/:country/:stat               controllers.TestControll
 GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
 
 ### COUNTRY ###
-GET          /country/view/:column/:order               controllers.Country.view(column: String, order: String)
+GET          /country/view/:column/:order/:page         controllers.Country.view(column: String, order: String, page: Int)
 GET          /country/states/:country/:column/:order    controllers.Country.states(country: String, column: String, order: String)
 
 ### GRAPHS ###

@@ -1,5 +1,5 @@
 @import helper._
-@(states: Array[models.StateSum], country: String, column: String, order: String)(implicit request: RequestHeader)
+@(states: StateSeries, country: String, column: String, order: String)(implicit request: RequestHeader)
 
 @common.layout(country + " - States"){
   @common.message(request.flash, "Showing States for " + country)
@@ -58,7 +58,7 @@
         </h5>
       </div> 
     </div>
-    @for(state <- states){
+    @for(state <- states.datapoints){
       <div class="row">
         <div class="col-3">
           @state.state

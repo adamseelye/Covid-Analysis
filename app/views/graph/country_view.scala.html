@@ -4,11 +4,19 @@
 
 @common.layout(stat + " by Country", "barchart.js"){
   @common.message(request.flash, "Showing " + stat + " by country")
-  <canvas id="barchart" 
-  width="400" 
-  height="400" 
-  data-countryseries="@Json.toJson(countryseries)"
-  data-statseries="@Json.toJson(statseries)"
-  data-stat="@stat">
-  </canvas>
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+      </div>
+      <div class="col-10">
+        <canvas id="barchart" 
+        width="400" 
+        height="400" 
+        data-countryseries="@Json.toJson(countryseries)"
+        data-statseries="@Json.toJson(statseries)"
+        data-stat="@stat">
+        </canvas>
+      </div>
+    </div>
+  </div>
 }

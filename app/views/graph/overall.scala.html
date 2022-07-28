@@ -4,11 +4,18 @@
 
 @common.layout(stat + " - Overall", "linechart.js"){
   @common.message(request.flash, "Showing Overall")
-  <canvas id="linechart" 
-  width="400" 
-  height="400" 
-  data-dateseries="@Json.toJson(dateseries)"
-  data-statseries="@Json.toJson(statseries)"
-  data-stat="@stat">
-  </canvas>
+  <div class="container">
+    <div class="row">
+      <div class="col-1">
+      </div>
+        <canvas id="linechart" 
+        width="400" 
+        height="400" 
+        data-dateseries="@Json.toJson(dateseries)"
+        data-statseries="@Json.toJson(statseries)"
+        data-stat="@stat">
+        </canvas>
+      </div>
+    </div>
+  </div>
 }
