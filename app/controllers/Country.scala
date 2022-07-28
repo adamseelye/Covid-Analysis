@@ -19,13 +19,20 @@ class Country @Inject()(cc: ControllerComponents) extends AbstractController(cc)
                               order, 
                               page, 
                               countries.pages()
+                              )
       )
-    )
   }
 
-  def states(country: String = "ALL", column: String = "State", order: String = "ASC") = Action { implicit request =>
+  def states(country: String = "ALL", column: String = "State", order: String = "ASC", page: Int = 0) = Action { implicit request =>
     val states = models.Day.dayseries.state_series(country, column, order)
     
-    Ok(views.html.country.states(states, country, column, order))
+    Ok(views.html.country.states(states.page(page), 
+                                country, 
+                                column, 
+                                order,
+                                page,
+                                states.pages()
+                                )
+      )
   }
 }

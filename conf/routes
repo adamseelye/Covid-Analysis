@@ -1,22 +1,22 @@
 # Assets
-GET        /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
+GET        /assets/*file                                      controllers.Assets.versioned(path="/public", file: Asset)
 # Home
-GET        /                                            controllers.HomeController.index
+GET        /                                                  controllers.HomeController.index
 
 ### TEST ###
-GET          /test/overall/:stat/:column/:order/:page   controllers.TestController.overall(stat: String, column: String, order: String, page: Int)
-GET          /test/country/:country/:stat               controllers.TestController.country(country: String, stat: String)
-GET          /test/state/:country/:state/:stat          controllers.TestController.state(country: String, state: String, stat: String)
+GET          /test/overall/:stat/:column/:order/:page         controllers.TestController.overall(stat: String, column: String, order: String, page: Int)
+GET          /test/country/:country/:stat                     controllers.TestController.country(country: String, stat: String)
+GET          /test/state/:country/:state/:stat                controllers.TestController.state(country: String, state: String, stat: String)
 
 ### COUNTRY ###
-GET          /country/view/:column/:order/:page         controllers.Country.view(column: String, order: String, page: Int)
-GET          /country/states/:country/:column/:order    controllers.Country.states(country: String, column: String, order: String)
+GET          /country/view/:column/:order/:page               controllers.Country.view(column: String, order: String, page: Int)
+GET          /country/states/:country/:column/:order/:page    controllers.Country.states(country: String, column: String, order: String, page: Int)
 
 ### GRAPHS ###
 # Lines
-GET         /graph/overall/:stat                        controllers.Graph.overall(stat: String)
-GET         /graph/country/:country/:stat               controllers.Graph.country(country: String, stat: String)
-GET         /graph/state/:country/:state/:stat          controllers.Graph.state(country: String, state: String, stat: String)
+GET         /graph/overall/:stat                              controllers.Graph.overall(stat: String)
+GET         /graph/country/:country/:stat                     controllers.Graph.country(country: String, stat: String)
+GET         /graph/state/:country/:state/:stat                controllers.Graph.state(country: String, state: String, stat: String)
 # Bars
-GET         /graph/countries/:stat                      controllers.Graph.countries(stat: String)
-GET         /graph/states/:country/:stat                controllers.Graph.states(country: String, stat: String)
+GET         /graph/countries/:stat                            controllers.Graph.countries(stat: String)
+GET         /graph/states/:country/:stat/                     controllers.Graph.states(country: String, stat: String)

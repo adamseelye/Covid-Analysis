@@ -1,5 +1,5 @@
 @import helper._
-@(states: StateSeries, country: String, column: String, order: String)(implicit request: RequestHeader)
+@(states: StateSeries, country: String, column: String, order: String, page: Int, pages: Int)(implicit request: RequestHeader)
 
 @common.layout(country + " - States"){
   @common.message(request.flash, "Showing States for " + country)
@@ -8,11 +8,11 @@
       <div class="col-3 bold">
         <h5 class="text-center">
           @if(column == "State" && order == "ASC"){
-            <a href="/country/states/@country/State/DESC">
+            <a href="/country/states/@country/State/DESC/0">
               State
             </a>
           }else{
-            <a href="/country/states/@country/State/ASC">
+            <a href="/country/states/@country/State/ASC/0">
               State
             </a>
           }
@@ -21,11 +21,11 @@
       <div class="col-3 bold">
         <h5 class="text-center">
           @if(column == "Confirmed" && order == "ASC"){
-            <a href="/country/states/@country/Confirmed/DESC">
+            <a href="/country/states/@country/Confirmed/DESC/0">
               Confirmed
             </a>
           }else{
-            <a href="/country/states/@country/Confirmed/ASC">
+            <a href="/country/states/@country/Confirmed/ASC/0">
               Confirmed
             </a>
           }
@@ -34,11 +34,11 @@
       <div class="col-3 bold">
         <h5 class="text-center">
           @if(column == "Recovered" && order == "ASC"){
-            <a href="/country/states/@country/Recovered/DESC">
+            <a href="/country/states/@country/Recovered/DESC/0">
               Recovered
             </a>
           }else{
-            <a href="/country/states/@country/Recovered/ASC">
+            <a href="/country/states/@country/Recovered/ASC/0">
               Recovered
             </a>
           }
@@ -47,11 +47,11 @@
       <div class="col-3 bold">
         <h5 class="text-center">
           @if(column == "Deaths" && order == "ASC"){
-            <a href="/country/states/@country/Deaths/DESC">
+            <a href="/country/states/@country/Deaths/DESC/0">
               Deaths
             </a>
           }else{
-            <a href="/country/states/@country/Deaths/ASC">
+            <a href="/country/states/@country/Deaths/ASC/0">
               Deaths
             </a>
           }
@@ -118,5 +118,6 @@
         </div>
       </div>
     }
+    @common.pagination("country/states/" + country, column, order, page, pages)
   </div>
 }
