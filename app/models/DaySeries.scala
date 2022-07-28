@@ -115,7 +115,7 @@ case class DaySeries(dataframe: org.apache.spark.sql.DataFrame){
             )
         
         val start = index * size 
-        val end = (index + 1) * size
+        val end = (index + 1) * size - 1
         println(start)
         println(end)
         return DaySeries(

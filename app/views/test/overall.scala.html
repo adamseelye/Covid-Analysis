@@ -28,16 +28,16 @@
     </div>
     @for(point <- series.datapoints){
       <div class="row">
-        <div class="col-3">
+        <div class="col-3 text-center">
           @point.country
         </div>
-        <div class="col-3">
+        <div class="col-3 text-center">
           @point.state
         </div>
-        <div class="col-3">
+        <div class="col-3 text-center">
           @point.date.toString
         </div>
-        <div class="col-3">
+        <div class="col-3 text-center">
           @if(stat == "deaths"){
             @point.deaths
           }else if(stat == "confirmed"){
@@ -48,44 +48,6 @@
         </div>
       </div>
     }
-    <nav>
-      <ul class="pagination pagination-sm justify-content-center" max-size="10">
-        <li class="page-item">
-          @if(0 == site_page){
-              <a class="page-link disabled" href="/test/overall/@stat/@(site_page - 1)" aria-label="Previous">
-                @icons.left_arrow()
-              </a>
-          }else{
-            <a class="page-link" href="/test/overall/@stat/@(site_page - 1)" aria-label="Previous">
-              @icons.left_arrow()
-            </a>
-          }
-        </li>     
-        @for(page_number <- 0 to pages){
-          <li class="page-item">
-            @if(page_number == site_page){
-              <a class="page-link active" href="/test/overall/@stat/@page_number">
-                @page_number
-              </a>
-            }else{
-              <a class="page-link" href="/test/overall/@stat/@page_number">
-                @page_number
-              </a>
-            }
-          </li> 
-        }
-        <li class="page-item">
-          @if(pages == site_page){
-            <a class="page-link disabled" href="/test/overall/@stat/@(site_page - 1)" aria-label="Previous">
-              @icons.right_arrow()
-            </a>
-          }else{
-            <a class="page-link" href="/test/overall/@stat/@(site_page + 1)">
-              @icons.right_arrow()
-            </a>
-          }
-        </li>
-      </ul>
-    </nav>
+    @common.pagination("test/overall", stat, site_page, pages)
   </div>
 }
