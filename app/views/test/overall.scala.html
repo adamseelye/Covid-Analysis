@@ -1,5 +1,5 @@
 @import helper._
-@(series: models.DaySeries, stat: String, site_page: Int, pages: Int)(implicit request: RequestHeader)
+@(series: models.DaySeries, stat: String, column: String, order: String, site_page: Int, pages: Int)(implicit request: RequestHeader)
 
 @common.layout(stat.capitalize + " - Overall"){
   @common.message(request.flash, "Showing Overall")
@@ -17,12 +17,28 @@
         </div>
         <div class="col-3 bold">
           <h5 class="text-center">
-            Date
+            @if(column == "Date" && order == "ASC"){
+              <a href="/test/overall/@stat/Date/DESC/0">
+                Date
+              </a>
+            }else{
+              <a href="/test/overall/@stat/Date/ASC/0">
+                Date
+              </a>
+            }
           </h5>
         </div>
       <div class="col-3 bold">
         <h5 class="text-center">
-          @stat.capitalize
+          @if(column == stat && order == "ASC"){
+            <a href="/test/overall/@stat/@stat/DESC/0">
+              @stat.capitalize
+            </a>
+          }else{
+            <a href="/test/overall/@stat/@stat/ASC/0">
+              @stat.capitalize
+            </a>
+          }
         </h5>
       </div>
     </div>

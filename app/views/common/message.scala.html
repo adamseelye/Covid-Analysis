@@ -1,4 +1,4 @@
 @(message: Flash, default: String = "")
-<div id="message">
+<div id="message" class="invisible">
    @message.get("message").orElse(Some(default))
 </div>
