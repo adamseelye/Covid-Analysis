@@ -74,3 +74,6 @@ Slideshow Link
 	
 Zeppelin Notebook:
 	http://bitvalley.asuscomm.com:8080
+	
+Spark History Server:
+	http://bitvalley.asuscomm.com:18080
