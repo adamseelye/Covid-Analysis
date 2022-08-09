@@ -67,3 +67,13 @@ Stretch Goals:
 	- clean ui
 	- pdf export
 	- docker container
+	
+
+Slideshow Link
+	https://docs.google.com/presentation/d/1hm8qGJMLV5gwdQhNXY7lcEu8te2_Ei_TshX5BDGIfvQ/edit#slide=id.p
+	
+Zeppelin Notebook:
+	http://bitvalley.asuscomm.com:8080
+	
+Spark History Server:
+	http://bitvalley.asuscomm.com:18080
