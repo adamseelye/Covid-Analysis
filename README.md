@@ -71,3 +71,6 @@ Stretch Goals:
 
 Slideshow Link
 	https://docs.google.com/presentation/d/1hm8qGJMLV5gwdQhNXY7lcEu8te2_Ei_TshX5BDGIfvQ/edit#slide=id.p
+	
+Zeppelin Notebook:
+	http://bitvalley.asuscomm.com:8080
