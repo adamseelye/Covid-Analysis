@@ -71,12 +71,3 @@ Stretch Goals:
 
 Slideshow Link
 	https://docs.google.com/presentation/d/1hm8qGJMLV5gwdQhNXY7lcEu8te2_Ei_TshX5BDGIfvQ/edit#slide=id.p
-	
-Covid Analysis Home:
-	http://bitvalley.asuscomm.com:7777
-	
-Zeppelin Notebook:
-	http://bitvalley.asuscomm.com:8080
-	
-Spark History Server:
-	http://bitvalley.asuscomm.com:18080
